@@ -54,9 +54,24 @@ func main() {
 //
 // Compile, eval, profit!
 func exercise1() {
-	fmt.Println("=== Exercise 1: Hello World ===\n")
+	fmt.Println("=== Exercie 1: Hello World ===\n ")
+	env, err := cel.NewEnv()
+	if err != nil {
+		glog.Exitf("env error: %v", err)
+	}
+	ast, iss := env.Parse(`"Hello, World!"`)
+	if iss.Err() != nil {
+		glog.Exit(iss.Err())
+	}
 
-	fmt.Println()
+	checked, iss := env.Check(ast)
+	if iss.Err() != nil {
+		glog.Exit(iss.Err())
+	}
+
+	if !reflect.DeepEqual(checked.OutputType(), cel.StringType) {
+		glog.Exitf("Got %v, wanted %v output type", checked.OutputType(), cel.StringType)
+	}
 }
 
 // exercise2 shows how to declare and use variables in expressions.
@@ -161,7 +176,8 @@ func compile(env *cel.Env, expr string, celType *cel.Type) *cel.Ast {
 // and return the output, eval details (optional), or error that results from
 // evaluation.
 func eval(prg cel.Program,
-	vars any) (out ref.Val, det *cel.EvalDetails, err error) {
+	vars any,
+) (out ref.Val, det *cel.EvalDetails, err error) {
 	varMap, isMap := vars.(map[string]any)
 	fmt.Println("------ input ------")
 	if !isMap {
@@ -284,6 +300,4 @@ func valueToJSON(val ref.Val) string {
 	return string(bytes)
 }
 
-var (
-	emptyClaims = make(map[string]string)
-)
+var emptyClaims = make(map[string]string)
