@@ -1,4 +1,4 @@
-module github.com/google/cel-go
+module github.com/samiulsami/cel-go
 
 go 1.21.1
 
@@ -17,3 +17,6 @@ require (
 	golang.org/x/exp v0.0.0-20230515195305-f3d0a9c9a5cc // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240826202546-f6391c0de4c7 // indirect
 )
+
+replace github.com/google/cel-go => module github.com/samiulsami/cel-go master
+
