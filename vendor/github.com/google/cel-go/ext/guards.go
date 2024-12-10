@@ -15,9 +15,9 @@
 package ext
 
 import (
-	"github.com/samiulsami/cel-go/common/ast"
-	"github.com/samiulsami/cel-go/common/types"
-	"github.com/samiulsami/cel-go/common/types/ref"
+	"github.com/google/cel-go/common/ast"
+	"github.com/google/cel-go/common/types"
+	"github.com/google/cel-go/common/types/ref"
 )
 
 // function invocation guards for common call signatures within extension functions.

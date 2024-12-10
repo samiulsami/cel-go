@@ -20,13 +20,13 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/samiulsami/cel-go/common"
-	"github.com/samiulsami/cel-go/common/ast"
-	"github.com/samiulsami/cel-go/common/containers"
-	"github.com/samiulsami/cel-go/common/decls"
-	"github.com/samiulsami/cel-go/common/operators"
-	"github.com/samiulsami/cel-go/common/types"
-	"github.com/samiulsami/cel-go/common/types/ref"
+	"github.com/google/cel-go/common"
+	"github.com/google/cel-go/common/ast"
+	"github.com/google/cel-go/common/containers"
+	"github.com/google/cel-go/common/decls"
+	"github.com/google/cel-go/common/operators"
+	"github.com/google/cel-go/common/types"
+	"github.com/google/cel-go/common/types/ref"
 )
 
 type checker struct {
@@ -270,8 +270,7 @@ func (c *checker) checkCall(e ast.Expr) {
 }
 
 func (c *checker) resolveOverloadOrError(
-	e ast.Expr, fn *decls.FunctionDecl, target ast.Expr, args []ast.Expr,
-) {
+	e ast.Expr, fn *decls.FunctionDecl, target ast.Expr, args []ast.Expr) {
 	// Attempt to resolve the overload.
 	resolution := c.resolveOverload(e, fn, target, args)
 	// No such overload, error noted in the resolveOverload call, type recorded here.
@@ -285,8 +284,8 @@ func (c *checker) resolveOverloadOrError(
 }
 
 func (c *checker) resolveOverload(
-	call ast.Expr, fn *decls.FunctionDecl, target ast.Expr, args []ast.Expr,
-) *overloadResolution {
+	call ast.Expr, fn *decls.FunctionDecl, target ast.Expr, args []ast.Expr) *overloadResolution {
+
 	var argTypes []*types.Type
 	if target != nil {
 		argTypes = append(argTypes, c.getType(target))
@@ -699,18 +698,20 @@ func getWellKnownTypeName(t *types.Type) string {
 	return ""
 }
 
-var wellKnownTypes = map[types.Kind]string{
-	types.AnyKind:       "google.protobuf.Any",
-	types.BoolKind:      "google.protobuf.BoolValue",
-	types.BytesKind:     "google.protobuf.BytesValue",
-	types.DoubleKind:    "google.protobuf.DoubleValue",
-	types.DurationKind:  "google.protobuf.Duration",
-	types.DynKind:       "google.protobuf.Value",
-	types.IntKind:       "google.protobuf.Int64Value",
-	types.ListKind:      "google.protobuf.ListValue",
-	types.NullTypeKind:  "google.protobuf.NullValue",
-	types.MapKind:       "google.protobuf.Struct",
-	types.StringKind:    "google.protobuf.StringValue",
-	types.TimestampKind: "google.protobuf.Timestamp",
-	types.UintKind:      "google.protobuf.UInt64Value",
-}
+var (
+	wellKnownTypes = map[types.Kind]string{
+		types.AnyKind:       "google.protobuf.Any",
+		types.BoolKind:      "google.protobuf.BoolValue",
+		types.BytesKind:     "google.protobuf.BytesValue",
+		types.DoubleKind:    "google.protobuf.DoubleValue",
+		types.DurationKind:  "google.protobuf.Duration",
+		types.DynKind:       "google.protobuf.Value",
+		types.IntKind:       "google.protobuf.Int64Value",
+		types.ListKind:      "google.protobuf.ListValue",
+		types.NullTypeKind:  "google.protobuf.NullValue",
+		types.MapKind:       "google.protobuf.Struct",
+		types.StringKind:    "google.protobuf.StringValue",
+		types.TimestampKind: "google.protobuf.Timestamp",
+		types.UintKind:      "google.protobuf.UInt64Value",
+	}
+)

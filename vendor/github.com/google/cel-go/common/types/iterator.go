@@ -18,8 +18,8 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/samiulsami/cel-go/common/types/ref"
-	"github.com/samiulsami/cel-go/common/types/traits"
+	"github.com/google/cel-go/common/types/ref"
+	"github.com/google/cel-go/common/types/traits"
 )
 
 var (

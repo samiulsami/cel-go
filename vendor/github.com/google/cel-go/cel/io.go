@@ -21,12 +21,12 @@ import (
 
 	"google.golang.org/protobuf/proto"
 
-	"github.com/samiulsami/cel-go/common"
-	"github.com/samiulsami/cel-go/common/ast"
-	"github.com/samiulsami/cel-go/common/types"
-	"github.com/samiulsami/cel-go/common/types/ref"
-	"github.com/samiulsami/cel-go/common/types/traits"
-	"github.com/samiulsami/cel-go/parser"
+	"github.com/google/cel-go/common"
+	"github.com/google/cel-go/common/ast"
+	"github.com/google/cel-go/common/types"
+	"github.com/google/cel-go/common/types/ref"
+	"github.com/google/cel-go/common/types/traits"
+	"github.com/google/cel-go/parser"
 
 	celpb "cel.dev/expr"
 	exprpb "google.golang.org/genproto/googleapis/api/expr/v1alpha1"
@@ -126,20 +126,16 @@ func ValueAsProto(res ref.Val) (*celpb.Value, error) {
 	switch res.Type() {
 	case types.BoolType:
 		return &celpb.Value{
-			Kind: &celpb.Value_BoolValue{BoolValue: res.Value().(bool)},
-		}, nil
+			Kind: &celpb.Value_BoolValue{BoolValue: res.Value().(bool)}}, nil
 	case types.BytesType:
 		return &celpb.Value{
-			Kind: &celpb.Value_BytesValue{BytesValue: res.Value().([]byte)},
-		}, nil
+			Kind: &celpb.Value_BytesValue{BytesValue: res.Value().([]byte)}}, nil
 	case types.DoubleType:
 		return &celpb.Value{
-			Kind: &celpb.Value_DoubleValue{DoubleValue: res.Value().(float64)},
-		}, nil
+			Kind: &celpb.Value_DoubleValue{DoubleValue: res.Value().(float64)}}, nil
 	case types.IntType:
 		return &celpb.Value{
-			Kind: &celpb.Value_Int64Value{Int64Value: res.Value().(int64)},
-		}, nil
+			Kind: &celpb.Value_Int64Value{Int64Value: res.Value().(int64)}}, nil
 	case types.ListType:
 		l := res.(traits.Lister)
 		sz := l.Size().(types.Int)
@@ -153,9 +149,7 @@ func ValueAsProto(res ref.Val) (*celpb.Value, error) {
 		}
 		return &celpb.Value{
 			Kind: &celpb.Value_ListValue{
-				ListValue: &celpb.ListValue{Values: elts},
-			},
-		}, nil
+				ListValue: &celpb.ListValue{Values: elts}}}, nil
 	case types.MapType:
 		mapper := res.(traits.Mapper)
 		sz := mapper.Size().(types.Int)
@@ -175,32 +169,26 @@ func ValueAsProto(res ref.Val) (*celpb.Value, error) {
 		}
 		return &celpb.Value{
 			Kind: &celpb.Value_MapValue{
-				MapValue: &celpb.MapValue{Entries: entries},
-			},
-		}, nil
+				MapValue: &celpb.MapValue{Entries: entries}}}, nil
 	case types.NullType:
 		return &celpb.Value{
-			Kind: &celpb.Value_NullValue{},
-		}, nil
+			Kind: &celpb.Value_NullValue{}}, nil
 	case types.StringType:
 		return &celpb.Value{
-			Kind: &celpb.Value_StringValue{StringValue: res.Value().(string)},
-		}, nil
+			Kind: &celpb.Value_StringValue{StringValue: res.Value().(string)}}, nil
 	case types.TypeType:
 		typeName := res.(ref.Type).TypeName()
 		return &celpb.Value{Kind: &celpb.Value_TypeValue{TypeValue: typeName}}, nil
 	case types.UintType:
 		return &celpb.Value{
-			Kind: &celpb.Value_Uint64Value{Uint64Value: res.Value().(uint64)},
-		}, nil
+			Kind: &celpb.Value_Uint64Value{Uint64Value: res.Value().(uint64)}}, nil
 	default:
 		any, err := res.ConvertToNative(anyPbType)
 		if err != nil {
 			return nil, err
 		}
 		return &celpb.Value{
-			Kind: &celpb.Value_ObjectValue{ObjectValue: any.(*anypb.Any)},
-		}, nil
+			Kind: &celpb.Value_ObjectValue{ObjectValue: any.(*anypb.Any)}}, nil
 	}
 }
 

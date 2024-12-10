@@ -18,11 +18,11 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/samiulsami/cel-go/common/containers"
-	"github.com/samiulsami/cel-go/common/decls"
-	"github.com/samiulsami/cel-go/common/overloads"
-	"github.com/samiulsami/cel-go/common/types"
-	"github.com/samiulsami/cel-go/parser"
+	"github.com/google/cel-go/common/containers"
+	"github.com/google/cel-go/common/decls"
+	"github.com/google/cel-go/common/overloads"
+	"github.com/google/cel-go/common/types"
+	"github.com/google/cel-go/parser"
 )
 
 type aggregateLiteralElementType int
@@ -32,35 +32,37 @@ const (
 	homogenousElementType aggregateLiteralElementType = 1 << iota
 )
 
-var crossTypeNumericComparisonOverloads = map[string]struct{}{
-	// double <-> int | uint
-	overloads.LessDoubleInt64:           {},
-	overloads.LessDoubleUint64:          {},
-	overloads.LessEqualsDoubleInt64:     {},
-	overloads.LessEqualsDoubleUint64:    {},
-	overloads.GreaterDoubleInt64:        {},
-	overloads.GreaterDoubleUint64:       {},
-	overloads.GreaterEqualsDoubleInt64:  {},
-	overloads.GreaterEqualsDoubleUint64: {},
-	// int <-> double | uint
-	overloads.LessInt64Double:          {},
-	overloads.LessInt64Uint64:          {},
-	overloads.LessEqualsInt64Double:    {},
-	overloads.LessEqualsInt64Uint64:    {},
-	overloads.GreaterInt64Double:       {},
-	overloads.GreaterInt64Uint64:       {},
-	overloads.GreaterEqualsInt64Double: {},
-	overloads.GreaterEqualsInt64Uint64: {},
-	// uint <-> double | int
-	overloads.LessUint64Double:          {},
-	overloads.LessUint64Int64:           {},
-	overloads.LessEqualsUint64Double:    {},
-	overloads.LessEqualsUint64Int64:     {},
-	overloads.GreaterUint64Double:       {},
-	overloads.GreaterUint64Int64:        {},
-	overloads.GreaterEqualsUint64Double: {},
-	overloads.GreaterEqualsUint64Int64:  {},
-}
+var (
+	crossTypeNumericComparisonOverloads = map[string]struct{}{
+		// double <-> int | uint
+		overloads.LessDoubleInt64:           {},
+		overloads.LessDoubleUint64:          {},
+		overloads.LessEqualsDoubleInt64:     {},
+		overloads.LessEqualsDoubleUint64:    {},
+		overloads.GreaterDoubleInt64:        {},
+		overloads.GreaterDoubleUint64:       {},
+		overloads.GreaterEqualsDoubleInt64:  {},
+		overloads.GreaterEqualsDoubleUint64: {},
+		// int <-> double | uint
+		overloads.LessInt64Double:          {},
+		overloads.LessInt64Uint64:          {},
+		overloads.LessEqualsInt64Double:    {},
+		overloads.LessEqualsInt64Uint64:    {},
+		overloads.GreaterInt64Double:       {},
+		overloads.GreaterInt64Uint64:       {},
+		overloads.GreaterEqualsInt64Double: {},
+		overloads.GreaterEqualsInt64Uint64: {},
+		// uint <-> double | int
+		overloads.LessUint64Double:          {},
+		overloads.LessUint64Int64:           {},
+		overloads.LessEqualsUint64Double:    {},
+		overloads.LessEqualsUint64Int64:     {},
+		overloads.GreaterUint64Double:       {},
+		overloads.GreaterUint64Int64:        {},
+		overloads.GreaterEqualsUint64Double: {},
+		overloads.GreaterEqualsUint64Int64:  {},
+	}
+)
 
 // Env is the environment for type checking.
 //

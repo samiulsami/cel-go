@@ -22,9 +22,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/samiulsami/cel-go/common/ast"
-	"github.com/samiulsami/cel-go/common/types"
-	"github.com/samiulsami/cel-go/common/types/ref"
+	"github.com/google/cel-go/common/ast"
+	"github.com/google/cel-go/common/types"
+	"github.com/google/cel-go/common/types/ref"
 )
 
 // Adorner returns debug metadata that will be tacked on to the string
@@ -43,7 +43,8 @@ type Writer interface {
 	Buffer(e ast.Expr)
 }
 
-type emptyDebugAdorner struct{}
+type emptyDebugAdorner struct {
+}
 
 var emptyAdorner Adorner = &emptyDebugAdorner{}
 

@@ -19,4 +19,4 @@ require (
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240826202546-f6391c0de4c7 // indirect
 )
 
-replace github.com/google/cel-go => github.com/samiulsami/cel-go v0.0.0-20241209111421-50d47354fc19
+replace github.com/google/cel-go => ./

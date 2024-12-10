@@ -22,12 +22,12 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/samiulsami/cel-go/cel"
-	"github.com/samiulsami/cel-go/common/ast"
-	"github.com/samiulsami/cel-go/common/types"
-	"github.com/samiulsami/cel-go/common/types/ref"
-	"github.com/samiulsami/cel-go/common/types/traits"
-	"github.com/samiulsami/cel-go/interpreter"
+	"github.com/google/cel-go/cel"
+	"github.com/google/cel-go/common/ast"
+	"github.com/google/cel-go/common/types"
+	"github.com/google/cel-go/common/types/ref"
+	"github.com/google/cel-go/common/types/traits"
+	"github.com/google/cel-go/interpreter"
 )
 
 // Bindings returns a cel.EnvOption to configure support for local variable
@@ -331,4 +331,6 @@ func matchSlot(name string, slotCount int) (int, bool) {
 	return -1, false
 }
 
-var indexPrefix = "@index"
+var (
+	indexPrefix = "@index"
+)

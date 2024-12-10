@@ -20,15 +20,15 @@ import (
 	"strings"
 	"time"
 
-	"github.com/samiulsami/cel-go/common/ast"
-	"github.com/samiulsami/cel-go/common/operators"
-	"github.com/samiulsami/cel-go/common/overloads"
-	"github.com/samiulsami/cel-go/common/stdlib"
-	"github.com/samiulsami/cel-go/common/types"
-	"github.com/samiulsami/cel-go/common/types/ref"
-	"github.com/samiulsami/cel-go/common/types/traits"
-	"github.com/samiulsami/cel-go/interpreter"
-	"github.com/samiulsami/cel-go/parser"
+	"github.com/google/cel-go/common/ast"
+	"github.com/google/cel-go/common/operators"
+	"github.com/google/cel-go/common/overloads"
+	"github.com/google/cel-go/common/stdlib"
+	"github.com/google/cel-go/common/types"
+	"github.com/google/cel-go/common/types/ref"
+	"github.com/google/cel-go/common/types/traits"
+	"github.com/google/cel-go/interpreter"
+	"github.com/google/cel-go/parser"
 )
 
 const (

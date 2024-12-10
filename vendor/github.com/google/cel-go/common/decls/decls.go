@@ -19,10 +19,10 @@ import (
 	"fmt"
 	"strings"
 
-	chkdecls "github.com/samiulsami/cel-go/checker/decls"
-	"github.com/samiulsami/cel-go/common/functions"
-	"github.com/samiulsami/cel-go/common/types"
-	"github.com/samiulsami/cel-go/common/types/ref"
+	chkdecls "github.com/google/cel-go/checker/decls"
+	"github.com/google/cel-go/common/functions"
+	"github.com/google/cel-go/common/types"
+	"github.com/google/cel-go/common/types/ref"
 
 	exprpb "google.golang.org/genproto/googleapis/api/expr/v1alpha1"
 )
@@ -395,8 +395,7 @@ func SingletonFunctionBinding(fn functions.FunctionOp, traits ...int) FunctionOp
 // strict-ness should be rare occurrences.
 func Overload(overloadID string,
 	args []*types.Type, resultType *types.Type,
-	opts ...OverloadOpt,
-) FunctionOpt {
+	opts ...OverloadOpt) FunctionOpt {
 	return newOverload(overloadID, false, args, resultType, opts...)
 }
 
@@ -408,15 +407,13 @@ func Overload(overloadID string,
 // strict-ness should be rare occurrences.
 func MemberOverload(overloadID string,
 	args []*types.Type, resultType *types.Type,
-	opts ...OverloadOpt,
-) FunctionOpt {
+	opts ...OverloadOpt) FunctionOpt {
 	return newOverload(overloadID, true, args, resultType, opts...)
 }
 
 func newOverload(overloadID string,
 	memberFunction bool, args []*types.Type, resultType *types.Type,
-	opts ...OverloadOpt,
-) FunctionOpt {
+	opts ...OverloadOpt) FunctionOpt {
 	return func(f *FunctionDecl) (*FunctionDecl, error) {
 		overload, err := newOverloadInternal(overloadID, memberFunction, args, resultType, opts...)
 		if err != nil {
@@ -432,8 +429,7 @@ func newOverload(overloadID string,
 
 func newOverloadInternal(overloadID string,
 	memberFunction bool, args []*types.Type, resultType *types.Type,
-	opts ...OverloadOpt,
-) (*OverloadDecl, error) {
+	opts ...OverloadOpt) (*OverloadDecl, error) {
 	overload := &OverloadDecl{
 		id:               overloadID,
 		argTypes:         args,
@@ -855,4 +851,6 @@ func collectParamNames(paramNames map[string]struct{}, arg *types.Type) {
 	}
 }
 
-var emptyArgs = []*types.Type{}
+var (
+	emptyArgs = []*types.Type{}
+)

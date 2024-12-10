@@ -15,7 +15,7 @@
 package ast
 
 import (
-	"github.com/samiulsami/cel-go/common/types/ref"
+	"github.com/google/cel-go/common/types/ref"
 )
 
 // ExprKind represents the expression node kind.
@@ -605,10 +605,8 @@ func (e baseIdentExpr) renumberIDs(IDGenerator) {}
 
 func (baseIdentExpr) isExpr() {}
 
-var (
-	_ exprKindCase = &baseLiteral{}
-	_ ref.Val      = &baseLiteral{}
-)
+var _ exprKindCase = &baseLiteral{}
+var _ ref.Val = &baseLiteral{}
 
 type baseLiteral struct {
 	ref.Val

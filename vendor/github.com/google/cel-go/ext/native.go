@@ -25,11 +25,11 @@ import (
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/reflect/protoreflect"
 
-	"github.com/samiulsami/cel-go/cel"
-	"github.com/samiulsami/cel-go/common/types"
-	"github.com/samiulsami/cel-go/common/types/pb"
-	"github.com/samiulsami/cel-go/common/types/ref"
-	"github.com/samiulsami/cel-go/common/types/traits"
+	"github.com/google/cel-go/cel"
+	"github.com/google/cel-go/common/types"
+	"github.com/google/cel-go/common/types/pb"
+	"github.com/google/cel-go/common/types/ref"
+	"github.com/google/cel-go/common/types/traits"
 
 	structpb "google.golang.org/protobuf/types/known/structpb"
 )
@@ -634,7 +634,9 @@ func newNativeTypes(fieldNameHandler NativeTypesFieldNameHandler, rawType reflec
 	return result, err
 }
 
-var errDuplicatedFieldName = errors.New("field name already exists in struct")
+var (
+	errDuplicatedFieldName = errors.New("field name already exists in struct")
+)
 
 func newNativeType(fieldNameHandler NativeTypesFieldNameHandler, rawType reflect.Type) (*nativeType, error) {
 	refType := rawType

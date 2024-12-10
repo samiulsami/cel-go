@@ -16,13 +16,13 @@
 package stdlib
 
 import (
-	"github.com/samiulsami/cel-go/common/decls"
-	"github.com/samiulsami/cel-go/common/functions"
-	"github.com/samiulsami/cel-go/common/operators"
-	"github.com/samiulsami/cel-go/common/overloads"
-	"github.com/samiulsami/cel-go/common/types"
-	"github.com/samiulsami/cel-go/common/types/ref"
-	"github.com/samiulsami/cel-go/common/types/traits"
+	"github.com/google/cel-go/common/decls"
+	"github.com/google/cel-go/common/functions"
+	"github.com/google/cel-go/common/operators"
+	"github.com/google/cel-go/common/overloads"
+	"github.com/google/cel-go/common/types"
+	"github.com/google/cel-go/common/types/ref"
+	"github.com/google/cel-go/common/types/traits"
 )
 
 var (

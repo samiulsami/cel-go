@@ -27,10 +27,10 @@ import (
 
 	"golang.org/x/text/language"
 
-	"github.com/samiulsami/cel-go/cel"
-	"github.com/samiulsami/cel-go/common/types"
-	"github.com/samiulsami/cel-go/common/types/ref"
-	"github.com/samiulsami/cel-go/common/types/traits"
+	"github.com/google/cel-go/cel"
+	"github.com/google/cel-go/common/types"
+	"github.com/google/cel-go/common/types/ref"
+	"github.com/google/cel-go/common/types/traits"
 )
 
 const (
@@ -480,6 +480,7 @@ func (lib *stringLib) CompileOptions() []cel.EnvOption {
 				}))),
 
 			cel.ASTValidators(stringFormatValidator{}))
+
 	}
 	if lib.version >= 2 {
 		opts = append(opts,
@@ -769,4 +770,6 @@ func sanitize(s string) string {
 	return sanitizedStringBuilder.String()
 }
 
-var stringListType = reflect.TypeOf([]string{})
+var (
+	stringListType = reflect.TypeOf([]string{})
+)

@@ -10,5 +10,5 @@ go_library(
     srcs = [
         "overloads.go",
     ],
-    importpath = "github.com/samiulsami/cel-go/common/overloads",
+    importpath = "github.com/google/cel-go/common/overloads",
 )

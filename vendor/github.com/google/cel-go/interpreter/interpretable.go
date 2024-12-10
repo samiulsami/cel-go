@@ -18,12 +18,12 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/samiulsami/cel-go/common/functions"
-	"github.com/samiulsami/cel-go/common/operators"
-	"github.com/samiulsami/cel-go/common/overloads"
-	"github.com/samiulsami/cel-go/common/types"
-	"github.com/samiulsami/cel-go/common/types/ref"
-	"github.com/samiulsami/cel-go/common/types/traits"
+	"github.com/google/cel-go/common/functions"
+	"github.com/google/cel-go/common/operators"
+	"github.com/google/cel-go/common/overloads"
+	"github.com/google/cel-go/common/types"
+	"github.com/google/cel-go/common/types/ref"
+	"github.com/google/cel-go/common/types/traits"
 )
 
 // Interpretable can accept a given Activation and produce a value along with
@@ -1402,9 +1402,11 @@ func checkInterrupt(a Activation) bool {
 	return found && stop == true
 }
 
-// pool of var folders to reduce allocations during folds.
-var folderPool = &sync.Pool{
-	New: func() any {
-		return &folder{}
-	},
-}
+var (
+	// pool of var folders to reduce allocations during folds.
+	folderPool = &sync.Pool{
+		New: func() any {
+			return &folder{}
+		},
+	}
+)

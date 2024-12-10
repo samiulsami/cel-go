@@ -19,11 +19,11 @@ import (
 	"math"
 	"strings"
 
-	"github.com/samiulsami/cel-go/cel"
-	"github.com/samiulsami/cel-go/common/ast"
-	"github.com/samiulsami/cel-go/common/types"
-	"github.com/samiulsami/cel-go/common/types/ref"
-	"github.com/samiulsami/cel-go/common/types/traits"
+	"github.com/google/cel-go/cel"
+	"github.com/google/cel-go/common/ast"
+	"github.com/google/cel-go/common/types"
+	"github.com/google/cel-go/common/types/ref"
+	"github.com/google/cel-go/common/types/traits"
 )
 
 // Math returns a cel.EnvOption to configure namespaced math helper macros and
@@ -366,7 +366,9 @@ const (
 	bitShiftRightFunc = "math.bitShiftRight"
 )
 
-var errIntOverflow = types.NewErr("integer overflow")
+var (
+	errIntOverflow = types.NewErr("integer overflow")
+)
 
 // MathOption declares a functional operator for configuring math extensions.
 type MathOption func(*mathLib) *mathLib

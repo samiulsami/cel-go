@@ -22,10 +22,12 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/samiulsami/cel-go/common/types/ref"
+	"github.com/google/cel-go/common/types/ref"
 )
 
-var unspecifiedAttribute = &AttributeTrail{qualifierPath: []any{}}
+var (
+	unspecifiedAttribute = &AttributeTrail{qualifierPath: []any{}}
+)
 
 // NewAttributeTrail creates a new simple attribute from a variable name.
 func NewAttributeTrail(variable string) *AttributeTrail {

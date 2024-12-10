@@ -18,11 +18,11 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/samiulsami/cel-go/common/ast"
-	"github.com/samiulsami/cel-go/common/containers"
-	"github.com/samiulsami/cel-go/common/functions"
-	"github.com/samiulsami/cel-go/common/operators"
-	"github.com/samiulsami/cel-go/common/types"
+	"github.com/google/cel-go/common/ast"
+	"github.com/google/cel-go/common/containers"
+	"github.com/google/cel-go/common/functions"
+	"github.com/google/cel-go/common/operators"
+	"github.com/google/cel-go/common/types"
 )
 
 // interpretablePlanner creates an Interpretable evaluation plan from a proto Expr value.
@@ -41,8 +41,7 @@ func newPlanner(disp Dispatcher,
 	attrFactory AttributeFactory,
 	cont *containers.Container,
 	exprAST *ast.AST,
-	decorators ...InterpretableDecorator,
-) interpretablePlanner {
+	decorators ...InterpretableDecorator) interpretablePlanner {
 	return &planner{
 		disp:        disp,
 		provider:    provider,
@@ -289,8 +288,7 @@ func (p *planner) planCall(expr ast.Expr) (Interpretable, error) {
 func (p *planner) planCallZero(expr ast.Expr,
 	function string,
 	overload string,
-	impl *functions.Overload,
-) (Interpretable, error) {
+	impl *functions.Overload) (Interpretable, error) {
 	if impl == nil || impl.Function == nil {
 		return nil, fmt.Errorf("no such overload: %s()", function)
 	}
@@ -307,8 +305,7 @@ func (p *planner) planCallUnary(expr ast.Expr,
 	function string,
 	overload string,
 	impl *functions.Overload,
-	args []Interpretable,
-) (Interpretable, error) {
+	args []Interpretable) (Interpretable, error) {
 	var fn functions.UnaryOp
 	var trait int
 	var nonStrict bool
@@ -336,8 +333,7 @@ func (p *planner) planCallBinary(expr ast.Expr,
 	function string,
 	overload string,
 	impl *functions.Overload,
-	args []Interpretable,
-) (Interpretable, error) {
+	args []Interpretable) (Interpretable, error) {
 	var fn functions.BinaryOp
 	var trait int
 	var nonStrict bool
@@ -366,8 +362,7 @@ func (p *planner) planCallVarArgs(expr ast.Expr,
 	function string,
 	overload string,
 	impl *functions.Overload,
-	args []Interpretable,
-) (Interpretable, error) {
+	args []Interpretable) (Interpretable, error) {
 	var fn functions.FunctionOp
 	var trait int
 	var nonStrict bool

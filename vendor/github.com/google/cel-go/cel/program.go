@@ -19,10 +19,10 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/samiulsami/cel-go/common/ast"
-	"github.com/samiulsami/cel-go/common/types"
-	"github.com/samiulsami/cel-go/common/types/ref"
-	"github.com/samiulsami/cel-go/interpreter"
+	"github.com/google/cel-go/common/ast"
+	"github.com/google/cel-go/common/types"
+	"github.com/google/cel-go/common/types/ref"
+	"github.com/google/cel-go/interpreter"
 )
 
 // Program is an evaluable view of an Ast.
@@ -67,8 +67,7 @@ func NoVars() interpreter.Activation {
 // The `vars` value may either be an interpreter.Activation or any valid input to the
 // interpreter.NewActivation call.
 func PartialVars(vars any,
-	unknowns ...*interpreter.AttributePattern,
-) (interpreter.PartialActivation, error) {
+	unknowns ...*interpreter.AttributePattern) (interpreter.PartialActivation, error) {
 	return interpreter.NewPartialActivation(vars, unknowns...)
 }
 

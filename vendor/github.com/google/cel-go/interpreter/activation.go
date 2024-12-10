@@ -18,7 +18,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/samiulsami/cel-go/common/types/ref"
+	"github.com/google/cel-go/common/types/ref"
 )
 
 // Activation used to resolve identifiers by name and references by id.
@@ -139,8 +139,7 @@ func NewHierarchicalActivation(parent Activation, child Activation) Activation {
 // The `bindings` value may be any value type supported by the interpreter.NewActivation call,
 // but is typically either an existing Activation or map[string]any.
 func NewPartialActivation(bindings any,
-	unknowns ...*AttributePattern,
-) (PartialActivation, error) {
+	unknowns ...*AttributePattern) (PartialActivation, error) {
 	a, err := NewActivation(bindings)
 	if err != nil {
 		return nil, err

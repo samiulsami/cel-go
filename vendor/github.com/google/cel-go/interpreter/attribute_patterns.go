@@ -17,9 +17,9 @@ package interpreter
 import (
 	"fmt"
 
-	"github.com/samiulsami/cel-go/common/containers"
-	"github.com/samiulsami/cel-go/common/types"
-	"github.com/samiulsami/cel-go/common/types/ref"
+	"github.com/google/cel-go/common/containers"
+	"github.com/google/cel-go/common/types"
+	"github.com/google/cel-go/common/types/ref"
 )
 
 // AttributePattern represents a top-level variable with an optional set of qualifier patterns.
@@ -241,8 +241,7 @@ func (fac *partialAttributeFactory) matchesUnknownPatterns(
 	vars PartialActivation,
 	attrID int64,
 	variableNames []string,
-	qualifiers []Qualifier,
-) (*types.Unknown, error) {
+	qualifiers []Qualifier) (*types.Unknown, error) {
 	patterns := vars.UnknownAttributePatterns()
 	candidateIndices := map[int]struct{}{}
 	for _, variable := range variableNames {

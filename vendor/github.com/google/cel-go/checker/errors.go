@@ -15,9 +15,9 @@
 package checker
 
 import (
-	"github.com/samiulsami/cel-go/common"
-	"github.com/samiulsami/cel-go/common/ast"
-	"github.com/samiulsami/cel-go/common/types"
+	"github.com/google/cel-go/common"
+	"github.com/google/cel-go/common/ast"
+	"github.com/google/cel-go/common/types"
 )
 
 // typeErrors is a specialization of Errors.

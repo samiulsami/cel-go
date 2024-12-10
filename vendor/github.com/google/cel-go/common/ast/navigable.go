@@ -15,8 +15,8 @@
 package ast
 
 import (
-	"github.com/samiulsami/cel-go/common/types"
-	"github.com/samiulsami/cel-go/common/types/ref"
+	"github.com/google/cel-go/common/types"
+	"github.com/google/cel-go/common/types/ref"
 )
 
 // NavigableExpr represents the base navigable expression value with methods to inspect the

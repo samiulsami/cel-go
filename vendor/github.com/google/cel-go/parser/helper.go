@@ -19,10 +19,10 @@ import (
 
 	antlr "github.com/antlr4-go/antlr/v4"
 
-	"github.com/samiulsami/cel-go/common"
-	"github.com/samiulsami/cel-go/common/ast"
-	"github.com/samiulsami/cel-go/common/types"
-	"github.com/samiulsami/cel-go/common/types/ref"
+	"github.com/google/cel-go/common"
+	"github.com/google/cel-go/common/ast"
+	"github.com/google/cel-go/common/types"
+	"github.com/google/cel-go/common/types/ref"
 )
 
 type parserHelper struct {
@@ -120,8 +120,7 @@ func (p *parserHelper) newComprehension(ctx any,
 	accuInit ast.Expr,
 	condition ast.Expr,
 	step ast.Expr,
-	result ast.Expr,
-) ast.Expr {
+	result ast.Expr) ast.Expr {
 	return p.exprFactory.NewComprehension(
 		p.newID(ctx), iterRange, iterVar, accuVar, accuInit, condition, step, result)
 }
@@ -133,8 +132,7 @@ func (p *parserHelper) newComprehensionTwoVar(ctx any,
 	accuInit ast.Expr,
 	condition ast.Expr,
 	step ast.Expr,
-	result ast.Expr,
-) ast.Expr {
+	result ast.Expr) ast.Expr {
 	return p.exprFactory.NewComprehensionTwoVar(
 		p.newID(ctx), iterRange, iterVar, iterVar2, accuVar, accuInit, condition, step, result)
 }
@@ -443,8 +441,7 @@ func (e *exprHelper) NewComprehension(
 	accuInit ast.Expr,
 	condition ast.Expr,
 	step ast.Expr,
-	result ast.Expr,
-) ast.Expr {
+	result ast.Expr) ast.Expr {
 	return e.exprFactory.NewComprehension(
 		e.nextMacroID(), iterRange, iterVar, accuVar, accuInit, condition, step, result)
 }
@@ -458,8 +455,7 @@ func (e *exprHelper) NewComprehensionTwoVar(
 	accuInit,
 	condition,
 	step,
-	result ast.Expr,
-) ast.Expr {
+	result ast.Expr) ast.Expr {
 	return e.exprFactory.NewComprehensionTwoVar(
 		e.nextMacroID(), iterRange, iterVar, iterVar2, accuVar, accuInit, condition, step, result)
 }
@@ -504,9 +500,11 @@ func (e *exprHelper) NewError(exprID int64, message string) *common.Error {
 	return common.NewError(exprID, message, e.OffsetLocation(exprID))
 }
 
-// Thread-safe pool of ExprHelper values to minimize alloc overhead of ExprHelper creations.
-var exprHelperPool = &sync.Pool{
-	New: func() any {
-		return &exprHelper{}
-	},
-}
+var (
+	// Thread-safe pool of ExprHelper values to minimize alloc overhead of ExprHelper creations.
+	exprHelperPool = &sync.Pool{
+		New: func() any {
+			return &exprHelper{}
+		},
+	}
+)

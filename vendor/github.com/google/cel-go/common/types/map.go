@@ -23,9 +23,9 @@ import (
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/reflect/protoreflect"
 
-	"github.com/samiulsami/cel-go/common/types/pb"
-	"github.com/samiulsami/cel-go/common/types/ref"
-	"github.com/samiulsami/cel-go/common/types/traits"
+	"github.com/google/cel-go/common/types/pb"
+	"github.com/google/cel-go/common/types/ref"
+	"github.com/google/cel-go/common/types/traits"
 
 	anypb "google.golang.org/protobuf/types/known/anypb"
 	structpb "google.golang.org/protobuf/types/known/structpb"
@@ -169,7 +169,8 @@ func (m *baseMap) ConvertToNative(typeDesc reflect.Type) (any, error) {
 		}
 		return anypb.New(json.(proto.Message))
 	case jsonValueType, jsonStructType:
-		jsonEntries, err := m.ConvertToNative(reflect.TypeOf(map[string]*structpb.Value{}))
+		jsonEntries, err :=
+			m.ConvertToNative(reflect.TypeOf(map[string]*structpb.Value{}))
 		if err != nil {
 			return nil, err
 		}
@@ -672,13 +673,13 @@ func (m *protoMap) ConvertToNative(typeDesc reflect.Type) (any, error) {
 		}
 		return anypb.New(json.(proto.Message))
 	case jsonValueType, jsonStructType:
-		jsonEntries, err := m.ConvertToNative(reflect.TypeOf(map[string]*structpb.Value{}))
+		jsonEntries, err :=
+			m.ConvertToNative(reflect.TypeOf(map[string]*structpb.Value{}))
 		if err != nil {
 			return nil, err
 		}
 		jsonMap := &structpb.Struct{
-			Fields: jsonEntries.(map[string]*structpb.Value),
-		}
+			Fields: jsonEntries.(map[string]*structpb.Value)}
 		if typeDesc == jsonStructType {
 			return jsonMap, nil
 		}

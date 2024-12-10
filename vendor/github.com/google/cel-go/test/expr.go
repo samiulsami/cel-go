@@ -15,7 +15,7 @@
 package test
 
 import (
-	"github.com/samiulsami/cel-go/common/operators"
+	"github.com/google/cel-go/common/operators"
 
 	"google.golang.org/protobuf/proto"
 
@@ -43,9 +43,7 @@ var (
 
 		SourceInfo: &exprpb.SourceInfo{
 			LineOffsets: []int32{},
-			Positions:   map[int64]int32{},
-		},
-	}
+			Positions:   map[int64]int32{}}}
 
 	// Exists generates "[1, 1u, 1.0].exists(x, type(x) == uint)".
 	Exists = &TestExpr{
@@ -98,10 +96,7 @@ var (
 				16: 28,
 				17: 28,
 				18: 28,
-				19: 28,
-			},
-		},
-	}
+				19: 28}}}
 
 	// ExistsWithInput generates "elems.exists(x, type(x) == uint)".
 	ExistsWithInput = &TestExpr{
@@ -134,10 +129,7 @@ var (
 				7:  18,
 				8:  18,
 				9:  18,
-				10: 18,
-			},
-		},
-	}
+				10: 18}}}
 
 	// DynMap generates a map literal:
 	// {"hello": "world".size(),
@@ -161,9 +153,7 @@ var (
 
 		SourceInfo: &exprpb.SourceInfo{
 			LineOffsets: []int32{},
-			Positions:   map[int64]int32{},
-		},
-	}
+			Positions:   map[int64]int32{}}}
 
 	// LogicalAnd generates "a && {c: true}.c".
 	LogicalAnd = &TestExpr{
@@ -175,9 +165,7 @@ var (
 				"c")),
 		&exprpb.SourceInfo{
 			LineOffsets: []int32{},
-			Positions:   map[int64]int32{},
-		},
-	}
+			Positions:   map[int64]int32{}}}
 
 	// LogicalOr generates "{c: false}.c || a".
 	LogicalOr = &TestExpr{
@@ -189,9 +177,7 @@ var (
 			ExprIdent(1, "a")),
 		&exprpb.SourceInfo{
 			LineOffsets: []int32{},
-			Positions:   map[int64]int32{},
-		},
-	}
+			Positions:   map[int64]int32{}}}
 
 	// LogicalOrEquals generates "a || b == 'b'".
 	LogicalOrEquals = &TestExpr{
@@ -202,9 +188,7 @@ var (
 				ExprLiteral(3, "b"))),
 		&exprpb.SourceInfo{
 			LineOffsets: []int32{},
-			Positions:   map[int64]int32{},
-		},
-	}
+			Positions:   map[int64]int32{}}}
 
 	// LogicalAndMissingType generates "a && TestProto{c: true}.c" where the
 	// type 'TestProto' is undefined.
@@ -217,9 +201,7 @@ var (
 				"c")),
 		&exprpb.SourceInfo{
 			LineOffsets: []int32{},
-			Positions:   map[int64]int32{},
-		},
-	}
+			Positions:   map[int64]int32{}}}
 
 	// Conditional generates "a ? b < 1.0 : c == ["hello"]".
 	Conditional = &TestExpr{
@@ -235,9 +217,7 @@ var (
 				ExprList(8, ExprLiteral(7, "hello")))),
 		SourceInfo: &exprpb.SourceInfo{
 			LineOffsets: []int32{},
-			Positions:   map[int64]int32{},
-		},
-	}
+			Positions:   map[int64]int32{}}}
 
 	// Select generates "a.b.c".
 	Select = &TestExpr{
@@ -248,9 +228,7 @@ var (
 			"c"),
 		SourceInfo: &exprpb.SourceInfo{
 			LineOffsets: []int32{},
-			Positions:   map[int64]int32{},
-		},
-	}
+			Positions:   map[int64]int32{}}}
 
 	// Equality generates "a == 42".
 	Equality = &TestExpr{
@@ -260,9 +238,7 @@ var (
 			ExprLiteral(3, int64(42))),
 		SourceInfo: &exprpb.SourceInfo{
 			LineOffsets: []int32{},
-			Positions:   map[int64]int32{},
-		},
-	}
+			Positions:   map[int64]int32{}}}
 
 	// TypeEquality generates "type(a) == uint".
 	TypeEquality = &TestExpr{
@@ -273,30 +249,23 @@ var (
 			ExprIdent(3, "uint")),
 		SourceInfo: &exprpb.SourceInfo{
 			LineOffsets: []int32{},
-			Positions:   map[int64]int32{},
-		},
-	}
+			Positions:   map[int64]int32{}}}
 )
 
 // ExprIdent creates an ident (variable) Expr.
 func ExprIdent(id int64, name string) *exprpb.Expr {
 	return &exprpb.Expr{Id: id, ExprKind: &exprpb.Expr_IdentExpr{
-		IdentExpr: &exprpb.Expr_Ident{Name: name},
-	}}
+		IdentExpr: &exprpb.Expr_Ident{Name: name}}}
 }
 
 // ExprSelect creates a select Expr.
 func ExprSelect(id int64, operand *exprpb.Expr, field string) *exprpb.Expr {
-	return &exprpb.Expr{
-		Id: id,
+	return &exprpb.Expr{Id: id,
 		ExprKind: &exprpb.Expr_SelectExpr{
 			SelectExpr: &exprpb.Expr_Select{
 				Operand:  operand,
 				Field:    field,
-				TestOnly: false,
-			},
-		},
-	}
+				TestOnly: false}}}
 }
 
 // ExprLiteral creates a literal (constant) Expr.
@@ -305,32 +274,25 @@ func ExprLiteral(id int64, value interface{}) *exprpb.Expr {
 	switch value.(type) {
 	case bool:
 		literal = &exprpb.Constant{ConstantKind: &exprpb.Constant_BoolValue{
-			BoolValue: value.(bool),
-		}}
+			BoolValue: value.(bool)}}
 	case int64:
 		literal = &exprpb.Constant{ConstantKind: &exprpb.Constant_Int64Value{
-			Int64Value: value.(int64),
-		}}
+			Int64Value: value.(int64)}}
 	case uint64:
 		literal = &exprpb.Constant{ConstantKind: &exprpb.Constant_Uint64Value{
-			Uint64Value: value.(uint64),
-		}}
+			Uint64Value: value.(uint64)}}
 	case float64:
 		literal = &exprpb.Constant{ConstantKind: &exprpb.Constant_DoubleValue{
-			DoubleValue: value.(float64),
-		}}
+			DoubleValue: value.(float64)}}
 	case string:
 		literal = &exprpb.Constant{ConstantKind: &exprpb.Constant_StringValue{
-			StringValue: value.(string),
-		}}
+			StringValue: value.(string)}}
 	case structpb.NullValue:
 		literal = &exprpb.Constant{ConstantKind: &exprpb.Constant_NullValue{
-			NullValue: value.(structpb.NullValue),
-		}}
+			NullValue: value.(structpb.NullValue)}}
 	case []byte:
 		literal = &exprpb.Constant{ConstantKind: &exprpb.Constant_BytesValue{
-			BytesValue: value.([]byte),
-		}}
+			BytesValue: value.([]byte)}}
 	default:
 		panic("literal type not implemented")
 	}
@@ -339,72 +301,53 @@ func ExprLiteral(id int64, value interface{}) *exprpb.Expr {
 
 // ExprCall creates a call Expr.
 func ExprCall(id int64, function string, args ...*exprpb.Expr) *exprpb.Expr {
-	return &exprpb.Expr{
-		Id: id,
+	return &exprpb.Expr{Id: id,
 		ExprKind: &exprpb.Expr_CallExpr{
-			CallExpr: &exprpb.Expr_Call{Target: nil, Function: function, Args: args},
-		},
-	}
+			CallExpr: &exprpb.Expr_Call{Target: nil, Function: function, Args: args}}}
 }
 
 // ExprMemberCall creates a receiver-style call Expr.
 func ExprMemberCall(id int64, function string, target *exprpb.Expr, args ...*exprpb.Expr) *exprpb.Expr {
-	return &exprpb.Expr{
-		Id: id,
+	return &exprpb.Expr{Id: id,
 		ExprKind: &exprpb.Expr_CallExpr{
-			CallExpr: &exprpb.Expr_Call{Target: target, Function: function, Args: args},
-		},
-	}
+			CallExpr: &exprpb.Expr_Call{Target: target, Function: function, Args: args}}}
 }
 
 // ExprList creates a create list Expr.
 func ExprList(id int64, elements ...*exprpb.Expr) *exprpb.Expr {
-	return &exprpb.Expr{
-		Id: id,
+	return &exprpb.Expr{Id: id,
 		ExprKind: &exprpb.Expr_ListExpr{
-			ListExpr: &exprpb.Expr_CreateList{Elements: elements},
-		},
-	}
+			ListExpr: &exprpb.Expr_CreateList{Elements: elements}}}
 }
 
 // ExprMap creates a create struct Expr for a map.
 func ExprMap(id int64, entries ...*exprpb.Expr_CreateStruct_Entry) *exprpb.Expr {
 	return &exprpb.Expr{Id: id, ExprKind: &exprpb.Expr_StructExpr{
-		StructExpr: &exprpb.Expr_CreateStruct{Entries: entries},
-	}}
+		StructExpr: &exprpb.Expr_CreateStruct{Entries: entries}}}
 }
 
 // ExprType creates creates a create struct Expr for a message.
 func ExprType(id int64, messageName string,
-	entries ...*exprpb.Expr_CreateStruct_Entry,
-) *exprpb.Expr {
+	entries ...*exprpb.Expr_CreateStruct_Entry) *exprpb.Expr {
 	return &exprpb.Expr{Id: id, ExprKind: &exprpb.Expr_StructExpr{
 		StructExpr: &exprpb.Expr_CreateStruct{
-			MessageName: messageName, Entries: entries,
-		},
-	}}
+			MessageName: messageName, Entries: entries}}}
 }
 
 // ExprEntry creates a map entry for a create struct Expr.
 func ExprEntry(id int64, key *exprpb.Expr,
-	value *exprpb.Expr,
-) *exprpb.Expr_CreateStruct_Entry {
-	return &exprpb.Expr_CreateStruct_Entry{
-		Id:      id,
+	value *exprpb.Expr) *exprpb.Expr_CreateStruct_Entry {
+	return &exprpb.Expr_CreateStruct_Entry{Id: id,
 		KeyKind: &exprpb.Expr_CreateStruct_Entry_MapKey{MapKey: key},
-		Value:   value,
-	}
+		Value:   value}
 }
 
 // ExprField creates a field entry for a create struct Expr.
 func ExprField(id int64, field string,
-	value *exprpb.Expr,
-) *exprpb.Expr_CreateStruct_Entry {
-	return &exprpb.Expr_CreateStruct_Entry{
-		Id:      id,
+	value *exprpb.Expr) *exprpb.Expr_CreateStruct_Entry {
+	return &exprpb.Expr_CreateStruct_Entry{Id: id,
 		KeyKind: &exprpb.Expr_CreateStruct_Entry_FieldKey{FieldKey: field},
-		Value:   value,
-	}
+		Value:   value}
 }
 
 // ExprComprehension returns a comprehension Expr.
@@ -412,10 +355,8 @@ func ExprComprehension(id int64,
 	iterVar string, iterRange *exprpb.Expr,
 	accuVar string, accuInit *exprpb.Expr,
 	loopCondition *exprpb.Expr, loopStep *exprpb.Expr,
-	resultExpr *exprpb.Expr,
-) *exprpb.Expr {
-	return &exprpb.Expr{
-		Id: id,
+	resultExpr *exprpb.Expr) *exprpb.Expr {
+	return &exprpb.Expr{Id: id,
 		ExprKind: &exprpb.Expr_ComprehensionExpr{
 			ComprehensionExpr: &exprpb.Expr_Comprehension{
 				IterVar:       iterVar,
@@ -424,8 +365,5 @@ func ExprComprehension(id int64,
 				AccuInit:      accuInit,
 				LoopCondition: loopCondition,
 				LoopStep:      loopStep,
-				Result:        resultExpr,
-			},
-		},
-	}
+				Result:        resultExpr}}}
 }

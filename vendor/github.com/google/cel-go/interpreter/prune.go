@@ -15,12 +15,12 @@
 package interpreter
 
 import (
-	"github.com/samiulsami/cel-go/common/ast"
-	"github.com/samiulsami/cel-go/common/operators"
-	"github.com/samiulsami/cel-go/common/overloads"
-	"github.com/samiulsami/cel-go/common/types"
-	"github.com/samiulsami/cel-go/common/types/ref"
-	"github.com/samiulsami/cel-go/common/types/traits"
+	"github.com/google/cel-go/common/ast"
+	"github.com/google/cel-go/common/operators"
+	"github.com/google/cel-go/common/overloads"
+	"github.com/google/cel-go/common/types"
+	"github.com/google/cel-go/common/types/ref"
+	"github.com/google/cel-go/common/types/traits"
 )
 
 type astPruner struct {
@@ -77,8 +77,7 @@ func PruneAst(expr ast.Expr, macroCalls map[int64]ast.Expr, state EvalState) *as
 		expr:        expr,
 		macroCalls:  macroCalls,
 		state:       pruneState,
-		nextExprID:  getMaxID(expr),
-	}
+		nextExprID:  getMaxID(expr)}
 	newExpr, _ := pruner.maybePrune(expr)
 	newInfo := ast.NewSourceInfo(nil)
 	for id, call := range pruner.macroCalls {

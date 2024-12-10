@@ -22,9 +22,9 @@ import (
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/reflect/protoreflect"
 
-	"github.com/samiulsami/cel-go/common/types/pb"
-	"github.com/samiulsami/cel-go/common/types/ref"
-	"github.com/samiulsami/cel-go/common/types/traits"
+	"github.com/google/cel-go/common/types/pb"
+	"github.com/google/cel-go/common/types/ref"
+	"github.com/google/cel-go/common/types/traits"
 
 	exprpb "google.golang.org/genproto/googleapis/api/expr/v1alpha1"
 	anypb "google.golang.org/protobuf/types/known/anypb"
@@ -174,8 +174,7 @@ func (p *Registry) FindFieldType(structType, fieldName string) (*ref.FieldType, 
 	return &ref.FieldType{
 		Type:    field.CheckedType(),
 		IsSet:   field.IsSet,
-		GetFrom: field.GetFrom,
-	}, true
+		GetFrom: field.GetFrom}, true
 }
 
 // FindStructFieldNames returns the set of field names for the given struct type,
@@ -209,8 +208,7 @@ func (p *Registry) FindStructFieldType(structType, fieldName string) (*FieldType
 	return &FieldType{
 		Type:    fieldDescToCELType(field),
 		IsSet:   field.IsSet,
-		GetFrom: field.GetFrom,
-	}, true
+		GetFrom: field.GetFrom}, true
 }
 
 // FindIdent takes a qualified identifier name and returns a ref.Val if one exists.
@@ -238,11 +236,7 @@ func (p *Registry) FindType(structType string) (*exprpb.Type, bool) {
 		TypeKind: &exprpb.Type_Type{
 			Type: &exprpb.Type{
 				TypeKind: &exprpb.Type_MessageType{
-					MessageType: structType,
-				},
-			},
-		},
-	}, true
+					MessageType: structType}}}}, true
 }
 
 // FindStructType returns the Type give a qualified type name.
@@ -414,8 +408,10 @@ func singularFieldDescToCELType(field *pb.FieldDescription) *Type {
 // defaultTypeAdapter converts go native types to CEL values.
 type defaultTypeAdapter struct{}
 
-// DefaultTypeAdapter adapts canonical CEL types from their equivalent Go values.
-var DefaultTypeAdapter = &defaultTypeAdapter{}
+var (
+	// DefaultTypeAdapter adapts canonical CEL types from their equivalent Go values.
+	DefaultTypeAdapter = &defaultTypeAdapter{}
+)
 
 // NativeToValue implements the ref.TypeAdapter interface.
 func (a *defaultTypeAdapter) NativeToValue(value any) ref.Val {
@@ -748,21 +744,23 @@ func fieldTypeConversionError(field *pb.FieldDescription, err error) error {
 	return fmt.Errorf("field type conversion error for %v.%v value type: %v", msgName, field.Name(), err)
 }
 
-// ProtoCELPrimitives provides a map from the protoreflect Kind to the equivalent CEL type.
-var ProtoCELPrimitives = map[protoreflect.Kind]*Type{
-	protoreflect.BoolKind:     BoolType,
-	protoreflect.BytesKind:    BytesType,
-	protoreflect.DoubleKind:   DoubleType,
-	protoreflect.FloatKind:    DoubleType,
-	protoreflect.Int32Kind:    IntType,
-	protoreflect.Int64Kind:    IntType,
-	protoreflect.Sint32Kind:   IntType,
-	protoreflect.Sint64Kind:   IntType,
-	protoreflect.Uint32Kind:   UintType,
-	protoreflect.Uint64Kind:   UintType,
-	protoreflect.Fixed32Kind:  UintType,
-	protoreflect.Fixed64Kind:  UintType,
-	protoreflect.Sfixed32Kind: IntType,
-	protoreflect.Sfixed64Kind: IntType,
-	protoreflect.StringKind:   StringType,
-}
+var (
+	// ProtoCELPrimitives provides a map from the protoreflect Kind to the equivalent CEL type.
+	ProtoCELPrimitives = map[protoreflect.Kind]*Type{
+		protoreflect.BoolKind:     BoolType,
+		protoreflect.BytesKind:    BytesType,
+		protoreflect.DoubleKind:   DoubleType,
+		protoreflect.FloatKind:    DoubleType,
+		protoreflect.Int32Kind:    IntType,
+		protoreflect.Int64Kind:    IntType,
+		protoreflect.Sint32Kind:   IntType,
+		protoreflect.Sint64Kind:   IntType,
+		protoreflect.Uint32Kind:   UintType,
+		protoreflect.Uint64Kind:   UintType,
+		protoreflect.Fixed32Kind:  UintType,
+		protoreflect.Fixed64Kind:  UintType,
+		protoreflect.Sfixed32Kind: IntType,
+		protoreflect.Sfixed64Kind: IntType,
+		protoreflect.StringKind:   StringType,
+	}
+)

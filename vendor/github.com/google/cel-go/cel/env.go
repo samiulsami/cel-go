@@ -18,16 +18,16 @@ import (
 	"errors"
 	"sync"
 
-	"github.com/samiulsami/cel-go/checker"
-	chkdecls "github.com/samiulsami/cel-go/checker/decls"
-	"github.com/samiulsami/cel-go/common"
-	celast "github.com/samiulsami/cel-go/common/ast"
-	"github.com/samiulsami/cel-go/common/containers"
-	"github.com/samiulsami/cel-go/common/decls"
-	"github.com/samiulsami/cel-go/common/types"
-	"github.com/samiulsami/cel-go/common/types/ref"
-	"github.com/samiulsami/cel-go/interpreter"
-	"github.com/samiulsami/cel-go/parser"
+	"github.com/google/cel-go/checker"
+	chkdecls "github.com/google/cel-go/checker/decls"
+	"github.com/google/cel-go/common"
+	celast "github.com/google/cel-go/common/ast"
+	"github.com/google/cel-go/common/containers"
+	"github.com/google/cel-go/common/decls"
+	"github.com/google/cel-go/common/types"
+	"github.com/google/cel-go/common/types/ref"
+	"github.com/google/cel-go/interpreter"
+	"github.com/google/cel-go/parser"
 
 	exprpb "google.golang.org/genproto/googleapis/api/expr/v1alpha1"
 )
@@ -229,8 +229,7 @@ func (e *Env) Check(ast *Ast) (*Ast, *Issues) {
 	// detailed than the information provided by Check), is returned to the caller.
 	ast = &Ast{
 		source: ast.Source(),
-		impl:   checked,
-	}
+		impl:   checked}
 
 	// Avoid creating a validator config if it's not needed.
 	if len(e.validators) == 0 {

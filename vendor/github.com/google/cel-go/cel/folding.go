@@ -17,12 +17,12 @@ package cel
 import (
 	"fmt"
 
-	"github.com/samiulsami/cel-go/common/ast"
-	"github.com/samiulsami/cel-go/common/operators"
-	"github.com/samiulsami/cel-go/common/overloads"
-	"github.com/samiulsami/cel-go/common/types"
-	"github.com/samiulsami/cel-go/common/types/ref"
-	"github.com/samiulsami/cel-go/common/types/traits"
+	"github.com/google/cel-go/common/ast"
+	"github.com/google/cel-go/common/operators"
+	"github.com/google/cel-go/common/overloads"
+	"github.com/google/cel-go/common/types"
+	"github.com/google/cel-go/common/types/ref"
+	"github.com/google/cel-go/common/types/traits"
 )
 
 // ConstantFoldingOption defines a functional option for configuring constant folding.
@@ -550,7 +550,9 @@ func aggregateLiteralMatcher(e ast.NavigableExpr) bool {
 	return e.Kind() == ast.ListKind || e.Kind() == ast.MapKind || e.Kind() == ast.StructKind
 }
 
-var constantMatcher = ast.ConstantValueMatcher()
+var (
+	constantMatcher = ast.ConstantValueMatcher()
+)
 
 const (
 	defaultMaxConstantFoldIterations = 100

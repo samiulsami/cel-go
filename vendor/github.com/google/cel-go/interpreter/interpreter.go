@@ -18,10 +18,10 @@
 package interpreter
 
 import (
-	"github.com/samiulsami/cel-go/common/ast"
-	"github.com/samiulsami/cel-go/common/containers"
-	"github.com/samiulsami/cel-go/common/types"
-	"github.com/samiulsami/cel-go/common/types/ref"
+	"github.com/google/cel-go/common/ast"
+	"github.com/google/cel-go/common/containers"
+	"github.com/google/cel-go/common/types"
+	"github.com/google/cel-go/common/types/ref"
 )
 
 // Interpreter generates a new Interpretable from a checked or unchecked expression.
@@ -160,22 +160,19 @@ func NewInterpreter(dispatcher Dispatcher,
 	container *containers.Container,
 	provider types.Provider,
 	adapter types.Adapter,
-	attrFactory AttributeFactory,
-) Interpreter {
+	attrFactory AttributeFactory) Interpreter {
 	return &exprInterpreter{
 		dispatcher:  dispatcher,
 		container:   container,
 		provider:    provider,
 		adapter:     adapter,
-		attrFactory: attrFactory,
-	}
+		attrFactory: attrFactory}
 }
 
 // NewIntepretable implements the Interpreter interface method.
 func (i *exprInterpreter) NewInterpretable(
 	checked *ast.AST,
-	decorators ...InterpretableDecorator,
-) (Interpretable, error) {
+	decorators ...InterpretableDecorator) (Interpretable, error) {
 	p := newPlanner(
 		i.dispatcher,
 		i.provider,

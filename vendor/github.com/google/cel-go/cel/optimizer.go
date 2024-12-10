@@ -17,10 +17,10 @@ package cel
 import (
 	"sort"
 
-	"github.com/samiulsami/cel-go/common"
-	"github.com/samiulsami/cel-go/common/ast"
-	"github.com/samiulsami/cel-go/common/types"
-	"github.com/samiulsami/cel-go/common/types/ref"
+	"github.com/google/cel-go/common"
+	"github.com/google/cel-go/common/ast"
+	"github.com/google/cel-go/common/types"
+	"github.com/google/cel-go/common/types/ref"
 )
 
 // StaticOptimizer contains a sequence of ASTOptimizer instances which will be applied in order.
@@ -81,8 +81,7 @@ func (opt *StaticOptimizer) Optimize(env *Env, a *Ast) (*Ast, *Issues) {
 		// Recheck the updated expression for any possible type-agreement or validation errors.
 		parsed := &Ast{
 			source: a.Source(),
-			impl:   ast.NewAST(expr, info),
-		}
+			impl:   ast.NewAST(expr, info)}
 		checked, iss := ctx.Check(parsed)
 		if iss.Err() != nil {
 			return nil, iss

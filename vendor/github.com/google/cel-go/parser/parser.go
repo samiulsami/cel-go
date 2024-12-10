@@ -24,12 +24,12 @@ import (
 
 	antlr "github.com/antlr4-go/antlr/v4"
 
-	"github.com/samiulsami/cel-go/common"
-	"github.com/samiulsami/cel-go/common/ast"
-	"github.com/samiulsami/cel-go/common/operators"
-	"github.com/samiulsami/cel-go/common/runes"
-	"github.com/samiulsami/cel-go/common/types"
-	"github.com/samiulsami/cel-go/parser/gen"
+	"github.com/google/cel-go/common"
+	"github.com/google/cel-go/common/ast"
+	"github.com/google/cel-go/common/operators"
+	"github.com/google/cel-go/common/runes"
+	"github.com/google/cel-go/common/types"
+	"github.com/google/cel-go/parser/gen"
 )
 
 // Parser encapsulates the context necessary to perform parsing for different expressions.
@@ -178,7 +178,7 @@ func (rl *recursionListener) EnterEveryRule(ctx antlr.ParserRuleContext) {
 	ruleIndex := ctx.GetRuleIndex()
 	depth, found := rl.ruleTypeDepth[ruleIndex]
 	if !found {
-		counter := 1
+		var counter = 1
 		rl.ruleTypeDepth[ruleIndex] = &counter
 		depth = &counter
 	} else {
@@ -426,6 +426,7 @@ func (p *parser) Visit(tree antlr.ParseTree) any {
 		return p.reportError(common.NoLocation, "unknown parse element encountered: %s", txt)
 	}
 	return p.helper.newExpr(common.NoLocation)
+
 }
 
 // Visit a parse tree produced by CELParser#start.
@@ -750,6 +751,7 @@ func (p *parser) VisitDouble(ctx *gen.DoubleContext) any {
 		return p.reportError(ctx, "invalid double literal")
 	}
 	return p.helper.newLiteralDouble(ctx, f)
+
 }
 
 // Visit a parse tree produced by CELParser#String.

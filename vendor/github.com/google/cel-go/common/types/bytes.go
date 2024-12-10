@@ -21,7 +21,7 @@ import (
 	"reflect"
 	"unicode/utf8"
 
-	"github.com/samiulsami/cel-go/common/types/ref"
+	"github.com/google/cel-go/common/types/ref"
 
 	anypb "google.golang.org/protobuf/types/known/anypb"
 	structpb "google.golang.org/protobuf/types/known/structpb"
@@ -32,8 +32,10 @@ import (
 // operations.
 type Bytes []byte
 
-// byteWrapperType golang reflected type for protobuf bytes wrapper type.
-var byteWrapperType = reflect.TypeOf(&wrapperspb.BytesValue{})
+var (
+	// byteWrapperType golang reflected type for protobuf bytes wrapper type.
+	byteWrapperType = reflect.TypeOf(&wrapperspb.BytesValue{})
+)
 
 // Add implements traits.Adder interface method by concatenating byte sequences.
 func (b Bytes) Add(other ref.Val) ref.Val {

@@ -17,14 +17,14 @@ package ext
 import (
 	"math"
 
-	"github.com/samiulsami/cel-go/cel"
-	"github.com/samiulsami/cel-go/checker"
-	"github.com/samiulsami/cel-go/common/ast"
-	"github.com/samiulsami/cel-go/common/operators"
-	"github.com/samiulsami/cel-go/common/types"
-	"github.com/samiulsami/cel-go/common/types/ref"
-	"github.com/samiulsami/cel-go/common/types/traits"
-	"github.com/samiulsami/cel-go/interpreter"
+	"github.com/google/cel-go/cel"
+	"github.com/google/cel-go/checker"
+	"github.com/google/cel-go/common/ast"
+	"github.com/google/cel-go/common/operators"
+	"github.com/google/cel-go/common/types"
+	"github.com/google/cel-go/common/types/ref"
+	"github.com/google/cel-go/common/types/traits"
+	"github.com/google/cel-go/interpreter"
 )
 
 // Sets returns a cel.EnvOption to configure namespaced set relationship

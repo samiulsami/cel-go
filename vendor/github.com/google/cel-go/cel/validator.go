@@ -19,8 +19,8 @@ import (
 	"reflect"
 	"regexp"
 
-	"github.com/samiulsami/cel-go/common/ast"
-	"github.com/samiulsami/cel-go/common/overloads"
+	"github.com/google/cel-go/common/ast"
+	"github.com/google/cel-go/common/overloads"
 )
 
 const (

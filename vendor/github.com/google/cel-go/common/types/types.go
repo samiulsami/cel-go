@@ -21,9 +21,9 @@ import (
 
 	"google.golang.org/protobuf/proto"
 
-	chkdecls "github.com/samiulsami/cel-go/checker/decls"
-	"github.com/samiulsami/cel-go/common/types/ref"
-	"github.com/samiulsami/cel-go/common/types/traits"
+	chkdecls "github.com/google/cel-go/checker/decls"
+	"github.com/google/cel-go/common/types/ref"
+	"github.com/google/cel-go/common/types/traits"
 
 	celpb "cel.dev/expr"
 	exprpb "google.golang.org/genproto/googleapis/api/expr/v1alpha1"
@@ -214,10 +214,8 @@ var (
 	}
 )
 
-var (
-	_ ref.Type = &Type{}
-	_ ref.Val  = &Type{}
-)
+var _ ref.Type = &Type{}
+var _ ref.Val = &Type{}
 
 // Type holds a reference to a runtime type with an optional type-checked set of type parameters.
 type Type struct {

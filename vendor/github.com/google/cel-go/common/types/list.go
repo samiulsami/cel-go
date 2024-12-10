@@ -22,8 +22,8 @@ import (
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/reflect/protoreflect"
 
-	"github.com/samiulsami/cel-go/common/types/ref"
-	"github.com/samiulsami/cel-go/common/types/traits"
+	"github.com/google/cel-go/common/types/ref"
+	"github.com/google/cel-go/common/types/traits"
 
 	anypb "google.golang.org/protobuf/types/known/anypb"
 	structpb "google.golang.org/protobuf/types/known/structpb"
@@ -135,8 +135,7 @@ func (l *baseList) Add(other ref.Val) ref.Val {
 	return &concatList{
 		Adapter:  l.Adapter,
 		prevList: l,
-		nextList: otherList,
-	}
+		nextList: otherList}
 }
 
 // Contains implements the traits.Container interface method.
@@ -171,7 +170,8 @@ func (l *baseList) ConvertToNative(typeDesc reflect.Type) (any, error) {
 		}
 		return anypb.New(json.(proto.Message))
 	case jsonValueType, jsonListValueType:
-		jsonValues, err := l.ConvertToNative(reflect.TypeOf([]*structpb.Value{}))
+		jsonValues, err :=
+			l.ConvertToNative(reflect.TypeOf([]*structpb.Value{}))
 		if err != nil {
 			return nil, err
 		}
@@ -195,6 +195,7 @@ func (l *baseList) ConvertToNative(typeDesc reflect.Type) (any, error) {
 		nativeList = reflect.New(reflect.ArrayOf(elemCount, typeDesc)).Elem().Index(0)
 	} else {
 		nativeList = reflect.MakeSlice(typeDesc, elemCount, elemCount)
+
 	}
 	for i := 0; i < elemCount; i++ {
 		elem := l.NativeToValue(l.get(i))
@@ -353,8 +354,7 @@ func (l *concatList) Add(other ref.Val) ref.Val {
 	return &concatList{
 		Adapter:  l.Adapter,
 		prevList: l,
-		nextList: otherList,
-	}
+		nextList: otherList}
 }
 
 // Contains implements the traits.Container interface method.

@@ -21,8 +21,8 @@ import (
 	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/proto"
 
-	"github.com/samiulsami/cel-go/common/types/pb"
-	"github.com/samiulsami/cel-go/common/types/ref"
+	"github.com/google/cel-go/common/types/pb"
+	"github.com/google/cel-go/common/types/ref"
 
 	anypb "google.golang.org/protobuf/types/known/anypb"
 	structpb "google.golang.org/protobuf/types/known/structpb"
@@ -45,14 +45,12 @@ type protoObj struct {
 func NewObject(adapter Adapter,
 	typeDesc *pb.TypeDescription,
 	typeValue ref.Val,
-	value proto.Message,
-) ref.Val {
+	value proto.Message) ref.Val {
 	return &protoObj{
 		Adapter:   adapter,
 		value:     value,
 		typeDesc:  typeDesc,
-		typeValue: typeValue,
-	}
+		typeValue: typeValue}
 }
 
 func (o *protoObj) ConvertToNative(typeDesc reflect.Type) (any, error) {

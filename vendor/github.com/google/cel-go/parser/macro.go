@@ -17,11 +17,11 @@ package parser
 import (
 	"fmt"
 
-	"github.com/samiulsami/cel-go/common"
-	"github.com/samiulsami/cel-go/common/ast"
-	"github.com/samiulsami/cel-go/common/operators"
-	"github.com/samiulsami/cel-go/common/types"
-	"github.com/samiulsami/cel-go/common/types/ref"
+	"github.com/google/cel-go/common"
+	"github.com/google/cel-go/common/ast"
+	"github.com/google/cel-go/common/operators"
+	"github.com/google/cel-go/common/types"
+	"github.com/google/cel-go/common/types/ref"
 )
 
 // NewGlobalMacro creates a Macro for a global function with the specified arg count.
@@ -29,8 +29,7 @@ func NewGlobalMacro(function string, argCount int, expander MacroExpander) Macro
 	return &macro{
 		function: function,
 		argCount: argCount,
-		expander: expander,
-	}
+		expander: expander}
 }
 
 // NewReceiverMacro creates a Macro for a receiver function matching the specified arg count.
@@ -39,8 +38,7 @@ func NewReceiverMacro(function string, argCount int, expander MacroExpander) Mac
 		function:      function,
 		argCount:      argCount,
 		expander:      expander,
-		receiverStyle: true,
-	}
+		receiverStyle: true}
 }
 
 // NewGlobalVarArgMacro creates a Macro for a global function with a variable arg count.
@@ -48,8 +46,7 @@ func NewGlobalVarArgMacro(function string, expander MacroExpander) Macro {
 	return &macro{
 		function:    function,
 		expander:    expander,
-		varArgStyle: true,
-	}
+		varArgStyle: true}
 }
 
 // NewReceiverVarArgMacro creates a Macro for a receiver function matching a variable arg count.
@@ -58,8 +55,7 @@ func NewReceiverVarArgMacro(function string, expander MacroExpander) Macro {
 		function:      function,
 		expander:      expander,
 		receiverStyle: true,
-		varArgStyle:   true,
-	}
+		varArgStyle:   true}
 }
 
 // Macro interface for describing the function signature to match and the MacroExpander to apply.

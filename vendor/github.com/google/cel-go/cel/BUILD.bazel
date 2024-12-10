@@ -20,7 +20,7 @@ go_library(
         "program.go",
         "validator.go",
     ],
-    importpath = "github.com/samiulsami/cel-go/cel",
+    importpath = "github.com/google/cel-go/cel",
     visibility = ["//visibility:public"],
     deps = [
         "//checker:go_default_library",

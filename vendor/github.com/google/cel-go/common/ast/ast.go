@@ -16,9 +16,9 @@
 package ast
 
 import (
-	"github.com/samiulsami/cel-go/common"
-	"github.com/samiulsami/cel-go/common/types"
-	"github.com/samiulsami/cel-go/common/types/ref"
+	"github.com/google/cel-go/common"
+	"github.com/google/cel-go/common/types"
+	"github.com/google/cel-go/common/types/ref"
 )
 
 // AST contains a protobuf expression and source info along with CEL-native type and reference information.

@@ -15,7 +15,7 @@
 package interpreter
 
 import (
-	"github.com/samiulsami/cel-go/common/types/ref"
+	"github.com/google/cel-go/common/types/ref"
 )
 
 // EvalState tracks the values associated with expression ids during execution.

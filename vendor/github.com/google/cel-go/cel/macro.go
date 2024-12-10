@@ -17,10 +17,10 @@ package cel
 import (
 	"fmt"
 
-	"github.com/samiulsami/cel-go/common"
-	"github.com/samiulsami/cel-go/common/ast"
-	"github.com/samiulsami/cel-go/common/types"
-	"github.com/samiulsami/cel-go/parser"
+	"github.com/google/cel-go/common"
+	"github.com/google/cel-go/common/ast"
+	"github.com/google/cel-go/common/types"
+	"github.com/google/cel-go/parser"
 
 	exprpb "google.golang.org/genproto/googleapis/api/expr/v1alpha1"
 )
@@ -458,8 +458,7 @@ func (ah *adaptingHelper) Fold(iterVar string,
 	accuInit *exprpb.Expr,
 	condition *exprpb.Expr,
 	step *exprpb.Expr,
-	result *exprpb.Expr,
-) *exprpb.Expr {
+	result *exprpb.Expr) *exprpb.Expr {
 	return mustAdaptToProto(
 		ah.modernHelper.NewComprehension(
 			mustAdaptToExpr(iterRange),

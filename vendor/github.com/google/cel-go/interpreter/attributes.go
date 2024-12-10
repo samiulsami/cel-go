@@ -18,10 +18,10 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/samiulsami/cel-go/common/containers"
-	"github.com/samiulsami/cel-go/common/types"
-	"github.com/samiulsami/cel-go/common/types/ref"
-	"github.com/samiulsami/cel-go/common/types/traits"
+	"github.com/google/cel-go/common/containers"
+	"github.com/google/cel-go/common/types"
+	"github.com/google/cel-go/common/types/ref"
+	"github.com/google/cel-go/common/types/traits"
 )
 
 // AttributeFactory provides methods creating Attribute and Qualifier values.
@@ -1308,8 +1308,7 @@ func attrQualify(fac AttributeFactory, vars Activation, obj any, qualAttr Attrib
 // attrQualifyIfPresent conditionally performs the qualification of the result of attribute is present
 // on the target object.
 func attrQualifyIfPresent(fac AttributeFactory, vars Activation, obj any, qualAttr Attribute,
-	presenceOnly bool,
-) (any, bool, error) {
+	presenceOnly bool) (any, bool, error) {
 	val, err := qualAttr.Resolve(vars)
 	if err != nil {
 		return nil, false, err

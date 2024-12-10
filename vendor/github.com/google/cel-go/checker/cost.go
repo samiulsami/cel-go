@@ -17,11 +17,11 @@ package checker
 import (
 	"math"
 
-	"github.com/samiulsami/cel-go/common"
-	"github.com/samiulsami/cel-go/common/ast"
-	"github.com/samiulsami/cel-go/common/overloads"
-	"github.com/samiulsami/cel-go/common/types"
-	"github.com/samiulsami/cel-go/parser"
+	"github.com/google/cel-go/common"
+	"github.com/google/cel-go/common/ast"
+	"github.com/google/cel-go/common/overloads"
+	"github.com/google/cel-go/common/types"
+	"github.com/google/cel-go/parser"
 )
 
 // WARNING: Any changes to cost calculations in this file require a corresponding change in interpreter/runtimecost.go
@@ -686,8 +686,7 @@ func (c *coster) newAstNode(e ast.Expr) *astNode {
 		path:        path,
 		t:           c.getType(e),
 		expr:        e,
-		derivedSize: derivedSize,
-	}
+		derivedSize: derivedSize}
 }
 
 // isScalar returns true if the given type is known to be of a constant size at
@@ -701,4 +700,6 @@ func isScalar(t *types.Type) bool {
 	return false
 }
 
-var doubleTwoTo64 = math.Ldexp(1.0, 64)
+var (
+	doubleTwoTo64 = math.Ldexp(1.0, 64)
+)

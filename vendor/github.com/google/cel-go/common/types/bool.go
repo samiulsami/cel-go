@@ -19,7 +19,7 @@ import (
 	"reflect"
 	"strconv"
 
-	"github.com/samiulsami/cel-go/common/types/ref"
+	"github.com/google/cel-go/common/types/ref"
 
 	anypb "google.golang.org/protobuf/types/known/anypb"
 	structpb "google.golang.org/protobuf/types/known/structpb"
@@ -29,8 +29,10 @@ import (
 // Bool type that implements ref.Val and supports comparison and negation.
 type Bool bool
 
-// boolWrapperType golang reflected type for protobuf bool wrapper type.
-var boolWrapperType = reflect.TypeOf(&wrapperspb.BoolValue{})
+var (
+	// boolWrapperType golang reflected type for protobuf bool wrapper type.
+	boolWrapperType = reflect.TypeOf(&wrapperspb.BoolValue{})
+)
 
 // Boolean constants
 const (

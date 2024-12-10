@@ -17,7 +17,7 @@ package parser
 import (
 	"fmt"
 
-	"github.com/samiulsami/cel-go/common"
+	"github.com/google/cel-go/common"
 )
 
 // parseErrors is a specialization of Errors.

@@ -14,7 +14,7 @@
 
 package ast
 
-import "github.com/samiulsami/cel-go/common/types/ref"
+import "github.com/google/cel-go/common/types/ref"
 
 // ExprFactory interfaces defines a set of methods necessary for building native expression values.
 type ExprFactory interface {
@@ -40,7 +40,7 @@ type ExprFactory interface {
 	NewIdent(id int64, name string) Expr
 
 	// NewAccuIdent creates an Expr value representing an accumulator identifier within a
-	// comprehension.
+	//comprehension.
 	NewAccuIdent(id int64) Expr
 
 	// NewLiteral creates an Expr value representing a literal value, such as a string or integer.
@@ -308,4 +308,6 @@ func (fac *baseExprFactory) newEntryExpr(id int64, e entryExprKindCase) EntryExp
 	}
 }
 
-var defaultFactory = &baseExprFactory{}
+var (
+	defaultFactory = &baseExprFactory{}
+)
